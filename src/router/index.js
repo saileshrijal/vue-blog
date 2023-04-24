@@ -16,6 +16,11 @@ const routes = [
     component: AboutView
   },
   {
+    path:'/login',
+    name: 'login',
+    component: () => import('@/views/LoginView.vue')
+  },
+  {
     path: '/admin',
     name: 'admin',
     component: AdminLayout,
