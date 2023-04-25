@@ -34,6 +34,7 @@
 <script setup>
 import { ref } from 'vue'
 import axiosTokenInstance from '@/services/AxiosTokenInstance';
+import swal from 'sweetalert2';
 
 const password = ref({
     oldPassword: '',
@@ -42,10 +43,30 @@ const password = ref({
 
 const onSubmit = async () => {
     try {
-        const response = await axiosTokenInstance.put('/auth/changePassword', password.value);
+        const response = await axiosTokenInstance.put('/user/changePassword', password.value);
         console.log(response);
+        if (response.status === 200) {
+            swal.fire({
+                title: 'Success',
+                text: response.data.message,
+                icon: 'success',
+                confirmButtonText: 'Ok'
+            });
+            password.value = {
+                oldPassword: '',
+                newPassword: ''
+            };
+        }
     } catch (error) {
         console.log(error);
+        if (error.response.status === 400) {
+            swal.fire({
+                title: 'Error',
+                text: error.response.data.message,
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            });
+        }
     }
 }
 
