@@ -27,10 +27,10 @@
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                             aria-haspopup="true" aria-expanded="false">Hi! {{ user.firstName + " " + user.lastName }} </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">My Profile</a>
-                            <a class="dropdown-item" href="#">Change Password</a>
+                            <RouterLink class="dropdown-item" to="/myprofile">My Profile</RouterLink>
+                            <RouterLink class="dropdown-item" to="/changePassword" href="#">Change Password</RouterLink>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" @click="logout">Logout</a>
+                            <button class="dropdown-item" @click="logout">Logout</button>
                         </div>
                     </li>
                 </ul>

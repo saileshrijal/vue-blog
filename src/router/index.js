@@ -53,6 +53,24 @@ const routes = [
         meta: {
           requiresAuth: true,
           roles: ['Admin', 'User']
+        },
+      },
+      {
+        path: '/myprofile',
+        name: 'myprofile',
+        component: () => import('@/views/admin/MyProfile.vue'),
+        meta: {
+          requiresAuth: true,
+          roles: ['Admin', 'User']
+        }
+      },
+      {
+        path: '/changePassword',
+        name: 'changePassword',
+        component: () => import('@/views/admin/ChangePassword.vue'),
+        meta: {
+          requiresAuth: true,
+          roles: ['Admin', 'User']
         }
       }
     ]
@@ -68,7 +86,7 @@ router.beforeEach((to,from,next) => {
   const loggedIn = localStorage.getItem('token');
   if(to.matched.some(record => record.meta.requiresAuth)) {
     if(!loggedIn){
-      next('/login');
+      next('/login', {query: {to: to.path}});
     } else {
     const user = JSON.parse(localStorage.getItem('user'));
     if(to.matched.some(record => record.meta.roles && record.meta.roles.includes(user.role))) {
