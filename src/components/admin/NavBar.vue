@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="/post">Navbar</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
                 aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -15,10 +15,10 @@
                     </li>
 
                     <li class="nav-item" v-if="isAdmin">
-                        <a class="nav-link" href="#">User</a>
+                        <RouterLink to="/dashboard/user" class="nav-link">User</RouterLink>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Post</a>
+                        <RouterLink to="/dashboard/post" class="nav-link" href="#">Post</RouterLink>
                     </li>
                 </ul>
 
@@ -27,8 +27,8 @@
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                             aria-haspopup="true" aria-expanded="false">Hi! {{ user.firstName + " " + user.lastName }} </a>
                         <div class="dropdown-menu">
-                            <RouterLink class="dropdown-item" to="/myprofile">My Profile</RouterLink>
-                            <RouterLink class="dropdown-item" to="/changePassword" href="#">Change Password</RouterLink>
+                            <RouterLink class="dropdown-item" to="/dashboard/myProfile">My Profile</RouterLink>
+                            <RouterLink class="dropdown-item" to="/dashboard/changePassword">Change Password</RouterLink>
                             <div class="dropdown-divider"></div>
                             <button class="dropdown-item" @click="logout">Logout</button>
                         </div>

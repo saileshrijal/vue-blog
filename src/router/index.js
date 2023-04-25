@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import AdminLayout from '@/layouts/AdminLayout.vue'
 import AboutView from '../views/AboutView.vue'
 import HomeView from '../views/HomeView.vue'
-import PostView from '@/views/admin/post/PostView.vue'
+import PostView from '@/views/dashboard/post/PostView.vue'
 
 const routes = [
   {
@@ -32,23 +32,59 @@ const routes = [
     component: () => import('@/views/error/NotFound.vue')
   },
   {
-    path: '/admin',
-    name: 'admin',
+    path: '/dashboard',
+    name: 'dashboard',
     component: AdminLayout,
-    redirect: '/admin/post',
+    redirect: '/dashboard/post',
     children: [
       {
-        path: '/admin/user',
-        name: 'admin-user',
-        component: () => import('@/views/admin/user/UserView.vue'),
+        path: '/dashboard/user',
+        name: 'dasbhoard-user',
+        component: () => import('@/views/dashboard/user/UserView.vue'),
         meta: {
           requiresAuth: true,
           roles: ['Admin']
         }
       },
       {
-        path: '/admin/post',
-        name: 'admin-post',
+        path: 'dashboard/user',
+        name: 'dashboard-user',
+        component: () => import('@/views/dashboard/user/UserView.vue'),
+        meta: {
+          requiresAuth: true,
+          roles: ['Admin']
+        }
+      },
+      {
+        path: '/dashboard/user/create',
+        name: 'dashboard-user-create',
+        component: () => import('@/views/dashboard/user/CreateUser.vue'),
+        meta: {
+          requiresAuth: true,
+          roles: ['Admin']
+        }
+      },
+      {
+        path: '/dashboard/user/edit/:id',
+        name: 'dashboard-user-edit',
+        component: () => import('@/views/dashboard/user/EditUser.vue'),
+        meta: {
+          requiresAuth: true,
+          roles: ['Admin']
+        }
+      },
+      {
+        path: '/dashboard/user/ResetPassword/:id',
+        name: 'dashboard-user-resetPassword',
+        component: () => import('@/views/dashboard/user/ResetPassword.vue'),
+        meta: {
+          requiresAuth: true,
+          roles: ['Admin']
+        }
+      },
+      {
+        path: '/dashboard/post',
+        name: 'dashboard-post',
         component: PostView,
         meta: {
           requiresAuth: true,
@@ -56,18 +92,18 @@ const routes = [
         },
       },
       {
-        path: '/myprofile',
+        path: '/dashboard/myProfile',
         name: 'myprofile',
-        component: () => import('@/views/admin/MyProfile.vue'),
+        component: () => import('@/views/dashboard/MyProfile.vue'),
         meta: {
           requiresAuth: true,
           roles: ['Admin', 'User']
         }
       },
       {
-        path: '/changePassword',
+        path: '/dashboard/changePassword',
         name: 'changePassword',
-        component: () => import('@/views/admin/ChangePassword.vue'),
+        component: () => import('@/views/dashboard/ChangePassword.vue'),
         meta: {
           requiresAuth: true,
           roles: ['Admin', 'User']

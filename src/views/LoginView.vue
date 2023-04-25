@@ -85,7 +85,7 @@ const onSubmit = async () => {
             }
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('user', JSON.stringify(user));
-            router.push('/admin/post');
+            router.push('/dashboard/post');
         }
     }
 }
