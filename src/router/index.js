@@ -108,6 +108,33 @@ const routes = [
           requiresAuth: true,
           roles: ['Admin', 'User']
         }
+      },
+      {
+        path:'/dashboard/category',
+        name: 'dashboard-category',
+        component: () => import('@/views/dashboard/category/CategoryView.vue'),
+        meta: {
+          requiresAuth: true,
+          roles: ['Admin']
+        }
+      },
+      {
+        path:'/dashboard/category/create',
+        name: 'dashboard-category-create',
+        component: () => import('@/views/dashboard/category/CreateCategory.vue'),
+        meta: {
+          requiresAuth: true,
+          roles: ['Admin']
+        }
+      },
+      {
+        path:'/dashboard/category/edit/:id',
+        name: 'dashboard-category-edit',
+        component: () => import('@/views/dashboard/category/EditCategory.vue'),
+        meta: {
+          requiresAuth: true,
+          roles: ['Admin']
+        }
       }
     ]
   }
@@ -120,6 +147,10 @@ const router = createRouter({
 
 router.beforeEach((to,from,next) => {
   const loggedIn = localStorage.getItem('token');
+  //if loggedIn, skip login page
+  if(to.path == '/login' && loggedIn){
+    next('/dashboard');
+  }
   if(to.matched.some(record => record.meta.requiresAuth)) {
     if(!loggedIn){
       next('/login', {query: {to: to.path}});

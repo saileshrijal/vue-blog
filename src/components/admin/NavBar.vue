@@ -18,12 +18,15 @@
                         <RouterLink to="/dashboard/user" class="nav-link">User</RouterLink>
                     </li>
                     <li class="nav-item">
-                        <RouterLink to="/dashboard/post" class="nav-link" href="#">Post</RouterLink>
+                        <RouterLink to="/dashboard/category" class="nav-link">Category</RouterLink>
+                    </li>
+                    <li class="nav-item">
+                        <RouterLink to="/dashboard/post" class="nav-link">Post</RouterLink>
                     </li>
                 </ul>
 
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item dropstart">
+                    <li class="nav-item dropstart btn btn-info active">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                             aria-haspopup="true" aria-expanded="false">Hi! {{ user.firstName + " " + user.lastName }} </a>
                         <div class="dropdown-menu">
