@@ -1,18 +1,22 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <NavBar />
+  <div class="container py-4">
+    <div class="row">
+
+      <PostCard />
+      <PostCard />
+      <PostCard />
+      <PostCard />
+      <PostCard />
+      <PostCard />
+      <PostCard />
+
+
+    </div>
   </div>
 </template>
 
-<script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
-export default {
-  name: 'HomeView',
-  components: {
-    HelloWorld
-  }
-}
+<script setup>
+import NavBar from '@/components/NavBar.vue';
+import PostCard from '@/components/PostCard.vue';
 </script>

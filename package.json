@@ -13,6 +13,7 @@
     "core-js": "^3.8.3",
     "pinia": "^2.0.35",
     "sweetalert2": "^11.7.3",
+    "v-select2-component": "^0.4.7",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3"
   },
@@ -26,4 +27,5 @@
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3"
   }
+  
 }

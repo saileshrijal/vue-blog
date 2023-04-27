@@ -92,6 +92,24 @@ const routes = [
         },
       },
       {
+        path: '/dashboard/post/create',
+        name: 'dashboard-post-create',
+        component: () => import('@/views/dashboard/post/CreatePost.vue'),
+        meta: {
+          requiresAuth: true,
+          roles: ['Admin', 'User']
+        }
+      },
+      {
+        path: '/dashboard/post/edit/:id',
+        name: 'dashboard-post-edit',
+        component: () => import('@/views/dashboard/post/EditPost.vue'),
+        meta: {
+          requiresAuth: true,
+          roles: ['Admin', 'User']
+        }
+      },
+      {
         path: '/dashboard/myProfile',
         name: 'myprofile',
         component: () => import('@/views/dashboard/MyProfile.vue'),
