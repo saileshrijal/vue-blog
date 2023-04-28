@@ -6,14 +6,31 @@ import PostView from '@/views/dashboard/post/PostView.vue'
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
-  },
-  {
-    path: '/about',
-    name: 'about',
-    component: AboutView
+    path:'/',
+    name: 'blogLayout',
+    component: () => import('@/layouts/BlogLayout.vue'),
+    children: [
+      {
+        path: '/',
+        name: 'home',
+        component: HomeView
+      },
+      {
+        path: '/about',
+        name: 'about',
+        component: AboutView
+      },
+      {
+        path: '/post/:slug',
+        name: 'post',
+        component: () => import('@/views/PostView.vue')
+      },
+      {
+        path: '/category/:id',
+        name: 'category',
+        component: () => import('@/views/CategoryView.vue')
+      }
+    ]
   },
   {
     path:'/login',

@@ -1,6 +1,7 @@
-
-import { RouterView } from 'vue-router';
-
 <template>
   <RouterView />
 </template>
+
+<script setup>
+
+</script>

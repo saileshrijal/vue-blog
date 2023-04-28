@@ -6,12 +6,13 @@
                 <h4 class="card-title">List of Posts</h4>
             </div>
             <div class="card-body">
-                <div class="card shadow-lg mb-3" v-for="post in posts" :key="post.id">
+                <RouterLink :to="'/dashboard/post/edit/' + post.id" class="card shadow-lg mb-3 text-decoration-none "
+                    v-for="post in posts" :key="post.id">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-2">
                                 <img :src="post.thumbnailUrl != null ? imageBaseUrl + post.thumbnailUrl : 'https://images.unsplash.com/photo-1647891937869-bc31fe3f9836?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80'"
-                                    alt="" class="img-fluid" style="height: 100%; object-fit: cover;">
+                                    alt="" class="img-fluid" style="height: 120px; width: 100%; object-fit: cover;">
                             </div>
                             <div class="col-md-10">
                                 <h3>{{ post.title }}</h3>
@@ -22,12 +23,14 @@
                                 <p>
                                     <span class="bg-success text-light rounded-2 p-1">{{
                                         post.isPublished ? 'Published' : 'Draft' }}</span><span> On
-                                        {{ post.createdDate }}</span><span> By {{ post.author }}</span>
+                                        {{ post.createdDate }}</span><span> By {{ post.author
+                                        }}</span>
                                 </p>
+                                <!-- converting post.createdDate into string with short date -->
                             </div>
                         </div>
                     </div>
-                </div>
+                </RouterLink>
             </div>
         </div>
     </div>

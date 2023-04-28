@@ -8,6 +8,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav me-auto">
+
                     <li class="nav-item" v-if="isAdmin">
                         <RouterLink to="/dashboard/user" class="nav-link">User</RouterLink>
                     </li>
@@ -24,6 +25,7 @@
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                             aria-haspopup="true" aria-expanded="false">Hi! {{ user.firstName + " " + user.lastName }} </a>
                         <div class="dropdown-menu">
+                            <RouterLink class="dropdown-item" to="/">Visit Site</RouterLink>
                             <RouterLink class="dropdown-item" to="/dashboard/myProfile">My Profile</RouterLink>
                             <RouterLink class="dropdown-item" to="/dashboard/changePassword">Change Password</RouterLink>
                             <div class="dropdown-divider"></div>

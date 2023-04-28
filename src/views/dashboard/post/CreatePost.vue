@@ -1,5 +1,4 @@
 <template>
-    <pre>{{ post }}</pre>
     <form @submit.prevent="onSubmit" enctype="multipart/form-data">
         <div class="container py-4">
             <div class="card">
@@ -20,8 +19,10 @@
                                 <label for="shortDescription">Short Description</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <textarea id="description" placeholder="Description" class="form-control"
-                                    v-model="post.description" style="height: 200px;"></textarea>
+                                <Editor api-key="7qjkjvz7eegr5schf3b8iwvemcxjb82zvn5nvbm02u8l4xkb" :init="{
+                                        plugins: 'lists link image table code help wordcount'
+                                    }" id="description" placeholder="Description" class="form-control" v-model="post.description"
+                                    style="height: 200px;"></Editor>
                                 <label for="description">Short Description</label>
                             </div>
                             <div class="form-floating mb-3">
@@ -34,8 +35,8 @@
                         </div>
                         <div class="col-md-4 col-sm-12">
                             <div class="form-floating mb-3">
-                                <img src="https://images.unsplash.com/photo-1647891937869-bc31fe3f9836?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80"
-                                    alt="" class="img-fluid">
+                                <img :src="post.thumbnailUrl == '' ? defaultImage : post.thumbnailUrl" alt=""
+                                    class="img-fluid">
                             </div>
                             <div class="mb-3">
                                 <!-- //upload file  -->
@@ -65,6 +66,10 @@
 import { ref, onMounted } from 'vue';
 import axiosTokenInstance from '@/services/AxiosTokenInstance';
 import router from '@/router';
+import foreach from 'lodash/forEach';
+import Editor from '@tinymce/tinymce-vue'
+
+const defaultImage = 'https://images.unsplash.com/photo-1647891937869-bc31fe3f9836?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80';
 
 const post = ref({
     title: '',
@@ -73,6 +78,7 @@ const post = ref({
     thumbnail: '',
     categoryIds: [],
     isPublished: false,
+    thumbnailUrl: '',
 });
 
 const categories = ref([]);
@@ -89,7 +95,9 @@ const onSubmit = async () => {
     formData.append('description', post.value.description);
     formData.append('shortDescription', post.value.shortDescription);
     formData.append('thumbnail', post.value.thumbnail);
-    formData.append('categoryIds', post.value.categoryIds);
+    foreach(post.value.categoryIds, (categoryId) => {
+        formData.append('categoryIds[]', categoryId);
+    });
     formData.append('isPublished', post.value.isPublished);
 
     const response = await axiosTokenInstance.post('/post/create', formData);
@@ -102,6 +110,7 @@ const onSubmit = async () => {
 const onThumbnailChange = (event) => {
     const file = event.target.files[0];
     post.value.thumbnail = file;
+    post.value.thumbnailUrl = URL.createObjectURL(file);
 }
 
 </script>
